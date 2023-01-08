@@ -37,6 +37,12 @@ const handleChange = (event) => {
   const name = event.target.name;
   const value = event.target.value;
   handleStyle[name](value);
+  showCSS();
+};
+
+const showCSS = () => {
+  cssText.innerHTML =
+    '<span>' + btn.style.cssText.split('; ').join(';</span><span>');
 };
 
 controls.addEventListener('change', handleChange);
