@@ -38,11 +38,28 @@ const handleChange = (event) => {
   const value = event.target.value;
   handleStyle[name](value);
   showCSS();
+  saveValues(name, value);
 };
 
 const showCSS = () => {
   cssText.innerHTML =
     '<span>' + btn.style.cssText.split('; ').join(';</span><span>');
 };
+
+const saveValues = (name, value) => {
+  localStorage[name] = value;
+};
+
+const setValues = () => {
+  const properties = Object.keys(localStorage);
+
+  properties.forEach((propertie) => {
+    controls.elements[propertie].value = localStorage[propertie];
+    handleStyle[propertie](localStorage[propertie]);
+    showCSS();
+  });
+};
+
+setValues();
 
 controls.addEventListener('change', handleChange);
